@@ -1,0 +1,41 @@
+CREATE TABLE department(
+    ID int,
+    NAME Varchar(20),
+    Gender Varchar(5),
+    DateOfBirth Date);
+You can use the below statement to query the description of the created table:
+
+EXEC sp_columns department;
+
+
+Adding Data to Table:
+The date data type uses the format ‘YYYY-MM-DD‘. Use the below statement to add data to the department table:
+
+
+
+INSERT INTO department VALUES (1,'Neha','F','1994-06-03');
+INSERT INTO department VALUES (2,'Harsh','M','1996-03-12');
+INSERT INTO department VALUES (3,'Harsh','M','1995-05-01');
+INSERT INTO department VALUES (4,'Rupali','F',1996-11-11');
+INSERT INTO department VALUES (5,'Rohan','M','1992-03-08');
+To verify the contents of the table use the below statement:
+
+SELECT * FROM department
+
+
+Here, we will assume the DOB range to be from 1995-01-01 to 1996-12-31.
+
+Query:
+Now we will use the below syntax to query for the name of the Distinct Employee whose DOB is between a given range:
+
+Syntax:
+SELECT DISTINCT column_name1 FROM table_name 
+WHERE column_name2 between value1 and value2;
+So the query for our table goes as shown below:
+
+SELECT DISTINCT NAME FROM department 
+WHERE DateOfBirth between '1995-01-01' and '1996-12-31';
+
+
+
+
