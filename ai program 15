@@ -1,0 +1,19 @@
+In [50]:
+loc_A = (0, 0)
+loc_B = (1, 0)
+
+"""We change the simpleReflexAgentProgram so that it doesn't make use of the Rule class"""
+def SimpleReflexAgentProgram():
+    """This agent takes action based solely on the percept. [Figure 2.10]"""
+    
+    def program(percept):
+        loc, status = percept
+        return ('Suck' if status == 'Dirty' 
+                else'Right' if loc == loc_A 
+                            else'Left')
+    return program
+
+        
+# Create a simple reflex agent the two-state environment
+program = SimpleReflexAgentProgram()
+simple_reflex_agent = Agent(program)
