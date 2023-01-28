@@ -1,0 +1,79 @@
+boy(tom).
+boy(bob).
+girl(alice).
+girl(lili).
+
+pay(X,Y) :- boy(X), girl(Y).
+Following is the illustration of the above scenario −
+
+Backtracking works
+As X will be a boy, so there are two choices, and for each boy there are two choices alice and lili. Now let us see the output, how backtracking is working.
+
+Output
+| ?- [backtrack].
+compiling D:/TP Prolog/Sample_Codes/backtrack.pl for byte code...
+D:/TP Prolog/Sample_Codes/backtrack.pl compiled, 5 lines read - 703 bytes written, 22 ms
+
+yes
+| ?- pay(X,Y).
+
+X = tom
+Y = alice ?
+
+(15 ms) yes
+| ?- pay(X,Y).
+
+X = tom
+Y = alice ? ;
+
+X = tom
+Y = lili ? ;
+
+X = bob
+Y = alice ? ;
+
+X = bob
+Y = lili
+
+yes
+| ?- trace.
+The debugger will first creep -- showing everything (trace)
+
+(16 ms) yes
+{trace}
+| ?- pay(X,Y).
+   1 1 Call: pay(_23,_24) ?
+   2 2 Call: boy(_23) ?
+   2 2 Exit: boy(tom) ?
+   3 2 Call: girl(_24) ?
+   3 2 Exit: girl(alice) ?
+   1 1 Exit: pay(tom,alice) ?
+   
+X = tom
+Y = alice ? ;
+   1 1 Redo: pay(tom,alice) ?
+   3 2 Redo: girl(alice) ?
+   3 2 Exit: girl(lili) ?
+   1 1 Exit: pay(tom,lili) ?
+   
+X = tom
+Y = lili ? ;
+   1 1 Redo: pay(tom,lili) ?
+   2 2 Redo: boy(tom) ?
+   2 2 Exit: boy(bob) ?
+   3 2 Call: girl(_24) ?
+   3 2 Exit: girl(alice) ?
+   1 1 Exit: pay(bob,alice) ?
+   
+X = bob
+Y = alice ? ;
+   1 1 Redo: pay(bob,alice) ?
+   3 2 Redo: girl(alice) ?
+   3 2 Exit: girl(lili) ?
+   1 1 Exit: pay(bob,lili) ?
+X = bob
+Y = lili
+
+yes
+{trace}
+| ?-
