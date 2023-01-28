@@ -1,0 +1,46 @@
+[1: furniture(couch, LenC), % an unplaced couch
+position(door, DoorWall), % find the wall with the door
+opposite(DoorWall, OW), % the wall opposite the door
+right(DoorWall, RW), % the wall right of the door
+2: wall(OW, LenOW), % available space opposite
+wall(RW, LenRW), % available space to the right
+LenOW >= LenRW, % if opposite bigger than right
+LenC =< LenOW] % length of couch less than
+% wall space
+
+==>
+[retract(1), % remove the furniture term
+assert(position(couch, OW)), % assert new position
+retract(2), % remove the old wall, length
+NewSpace = LenOW - LenC, % calculate the space left
+assert(wall(OW, NewSpace))]. % assert new space
+
+% f3 - the tv should be opposite the couch
+
+[1: furniture(tv, LenTV),
+2: position(couch, CW),
+3: opposite(CW, W),
+4: wall(W, LenW),
+LenW >= LenTV]
+
+==>
+[retract(1),
+assert(position(tv, W)),
+retract(4),
+NewSpace = LenW - LenTV,
+assert(wall(W, NewSpace))].
+
+% get extension cords if needed
+
+[1: position(tv, W),
+2: not(position(plug, W))]
+
+==>
+[assert(buy(extension_cord, W)),
+assert(position(plug, W))].
+
+[1: position(table_lamp, W),
+2: not(position(plug, W))]
+
+==>
+[assert(buy(extension_cor
