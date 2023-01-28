@@ -1,0 +1,34 @@
+move(1,X,Y,_) :-
+   write('Move top disk from '), write(X), write(' to '), write(Y), nl.
+move(N,X,Y,Z) :-
+   N>1,
+   M is N-1,
+   move(M,X,Z,Y),
+   move(1,X,Y,_),
+   move(M,Z,Y,X).
+Output
+| ?- [towersofhanoi].
+compiling D:/TP Prolog/Sample_Codes/towersofhanoi.pl for byte code...
+D:/TP Prolog/Sample_Codes/towersofhanoi.pl compiled, 8 lines read - 1409 bytes written, 15 ms
+
+yes
+| ?- move(4,source,target,auxiliary).
+Move top disk from source to auxiliary
+Move top disk from source to target
+Move top disk from auxiliary to target
+Move top disk from source to auxiliary
+Move top disk from target to source
+Move top disk from target to auxiliary
+Move top disk from source to auxiliary
+Move top disk from source to target
+Move top disk from auxiliary to target
+Move top disk from auxiliary to source
+Move top disk from target to source
+Move top disk from auxiliary to target
+Move top disk from source to auxiliary
+Move top disk from source to target
+Move top disk from auxiliary to target
+
+true ?
+
+(31 ms) yes
